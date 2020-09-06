@@ -63,7 +63,7 @@ namespace ChessBoardModel
                     dc = new[] {1, -1, 1, -1, 2, -2, 2, -2};
                     for (int i = 0; i < Size; i++)
                     {
-                        if (IsInBounds(currentCell.RowNumber + dr[i], currentCell.ColumnNumber + dc[i]))
+                        if (IsValidSquare(currentCell.RowNumber + dr[i], currentCell.ColumnNumber + dc[i]))
                             TheGrid[currentCell.RowNumber + dr[i], currentCell.ColumnNumber + dc[i]].LegalNextMove =
                                 true;
                     }
@@ -73,11 +73,10 @@ namespace ChessBoardModel
                     dc = new[] {-1, 0, 1, -1, 0, 1, 1, -1};
                     for (int i = 0; i < Size; i++)
                     {
-                        if (IsInBounds(currentCell.RowNumber + dr[i], currentCell.ColumnNumber + dc[i]))
+                        if (IsValidSquare(currentCell.RowNumber + dr[i], currentCell.ColumnNumber + dc[i]))
                             TheGrid[currentCell.RowNumber + dr[i], currentCell.ColumnNumber + dc[i]].LegalNextMove =
                                 true;
                     }
-
                     break;
                 case "Rook":
                     MarkHorizontalandVerticalSquares(currentCell);
@@ -100,11 +99,6 @@ namespace ChessBoardModel
             }
 
             TheGrid[currentCell.RowNumber, currentCell.ColumnNumber].CurrentlyOccupied = true;
-        }
-
-        private bool IsInBounds(int row, int col)
-        {
-            return row >= 0 && row <= Size && col >= 0 && col <= Size;
         }
 
         /// <summary>
